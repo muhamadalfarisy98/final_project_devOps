@@ -1,0 +1,71 @@
+# TODO : run this one -> sudo docker compose up -d --build
+version: '3.6'
+services: 
+
+  # DB
+  database:
+    image: postgres:14
+    container_name: "database_final_project"
+    ports : 
+      - "5432:5432"
+    environment:
+      - POSTGRES_HOST=0.0.0.0
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=sanber
+      - POSTGRES_DB=sanber
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d sanber -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      # mounting
+      - ./database/db.sql:/home/db.sql
+      # dumper : sudo docker volume ls
+      - dbdata:/var/lib/postgresql/data:rw
+    networks:
+      - fullstuck
+
+  # rest API
+  backend:
+    build: ./golang
+    container_name: "backend_final_project"
+    ports:
+      - 8000:8000
+    #env : optional (overwrite)
+    environment:
+      - PGHOST=database
+      - PGUSER=postgres
+      - PGPASSWORD=sanber
+      - PGDBNAME=sanber
+      - PGPORT=5432
+      - SERVER_PORT=8000
+    depends_on:
+      database:
+        condition : service_healthy  
+    links: 
+      - database 
+    networks:
+      - fullstuck
+
+  #nginx
+  webserver:
+    build: 
+      dockerfile: ./nginx/Dockerfile
+    container_name: "nginx_final_project"
+    depends_on:
+      - backend
+    restart: on-failure
+    links :
+      - backend
+    networks:
+      - fullstuck
+    ports:
+      - "80:80"
+
+networks:
+  fullstuck:
+    driver: bridge
+
+volumes:
+  dbdata:
