@@ -1,5 +1,7 @@
 ## Final Project DevOps using Docker
 
+![images](https://user-images.githubusercontent.com/23287190/194307350-8c80e1f0-3a70-4d24-b36c-7646c0d55271.jpeg)
+
 how to start?
 
 1. clone `https://github.com/mrzdtydlntm/project-akhir-sanbercode` follows all the steps
