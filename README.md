@@ -1,6 +1,6 @@
 ## Final Project DevOps using Docker
 
-![images](https://user-images.githubusercontent.com/23287190/194307350-8c80e1f0-3a70-4d24-b36c-7646c0d55271.jpeg)
+![docker_compose](https://user-images.githubusercontent.com/23287190/194307534-4eb60397-0c14-4ce4-8334-c39bb6f9fdca.png)
 
 how to start?
 
