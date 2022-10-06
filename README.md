@@ -1,4 +1,4 @@
-## Final Project DevOps using Docker
+## Final Project DevOps using Docker compose
 
 ![docker_compose](https://user-images.githubusercontent.com/23287190/194307534-4eb60397-0c14-4ce4-8334-c39bb6f9fdca.png)
 
